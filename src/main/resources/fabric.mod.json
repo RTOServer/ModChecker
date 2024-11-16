@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "modchecker",
+  "version": "${version}",
+  "name": "ModChecker",
+  "description": "A Mod Checker",
+  "authors": [],
+  "contact": {},
+  "license": "LGPL-3.0",
+  "icon": "assets/modchecker/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "fun.rtos.modchecker.client.ModCheckerClient"
+    ],
+    "main": [
+      "fun.rtos.modchecker.ModChecker"
+    ]
+  },
+  "mixins": [
+    "modchecker.mixins.json",
+    {
+      "config": "modchecker.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "*"
+  }
+}

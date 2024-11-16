@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "fun.rtos.modchecker.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ClientHandshakePacketListenerImplAccessor",
+    "ConnectScreenAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "ConnectScreen$1Mixin"
+  ]
+}

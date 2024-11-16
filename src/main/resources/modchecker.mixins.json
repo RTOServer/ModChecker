@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "fun.rtos.modchecker.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "CommandsMixin",
+    "LoginProtocolsMixin",
+    "ServerHandshakePacketListenerImplMixin",
+    "ServerLoginPacketListenerImplAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
