@@ -6,8 +6,12 @@ plugins {
 version = project.mod_version
 group = project.maven_group
 
+if (build_number != "undefined") {
+    version += "+build.${build_number}"
+}
+
 base {
-    archivesName = project.archives_base_name
+    archivesName = project.archives_base_name + "-mc" + project.minecraft_version
 }
 
 loom {
