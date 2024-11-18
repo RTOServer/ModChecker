@@ -1,29 +1,54 @@
 package fun.rtos.modchecker.utils;
 
+import fun.rtos.modchecker.ModChecker;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class ModCheckerConfig {
+    private final Path path;
     private Mode mode;
     private final List<String> mods = new ArrayList<>();
 
-    public ModCheckerConfig(Mode mode) {
+    public ModCheckerConfig(Path path, Mode mode) {
+        this.path = path;
         this.mode = mode;
     }
 
-    public static @NotNull ModCheckerConfig fromRecord(@NotNull Record record) {
-        ModCheckerConfig config = new ModCheckerConfig(Mode.fromString(record.mode));
-        config.mods.addAll(record.mods);
-        return config;
+    public void loadConfig() {
+        if (!path.toFile().exists()) ModChecker.CONFIG.saveConfig();
+        try (var reader = Files.newBufferedReader(path)) {
+            this.fromRecord(ModChecker.GSON.fromJson(reader, ModCheckerConfig.Record.class));
+        } catch (IOException e) {
+            ModChecker.LOGGER.error("Failed to load config", e);
+            throw new RuntimeException(e);
+        }
     }
 
-    public static @NotNull Record toRecord(@NotNull ModCheckerConfig config) {
-        return new Record(config.mode.toString(), config.mods);
+    public void saveConfig() {
+        try (var writer = Files.newBufferedWriter(path)) {
+            ModChecker.GSON.toJson(this.toRecord(), writer);
+        } catch (IOException e) {
+            ModChecker.LOGGER.error("Failed to save config", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void fromRecord(@NotNull Record record) {
+        this.mode = Mode.fromString(record.mode);
+        this.clear();
+        this.mods.addAll(record.mods);
+    }
+
+    public @NotNull Record toRecord() {
+        return new Record(this.mode.toString(), this.mods);
     }
 
     public void setMode(Mode mode) {
@@ -43,11 +68,11 @@ public class ModCheckerConfig {
     }
 
     public void addMod(@NotNull String mod) {
-        mods.add(mod);
+        mods.add(mod.trim());
     }
 
     public void addMods(@NotNull Collection<String> mod) {
-        mods.addAll(mod);
+        mod.forEach(this::addMod);
     }
 
     public void removeMod(@NotNull String mod) {

@@ -5,9 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "CommandsMixin",
-    "LoginProtocolsMixin",
-    "ServerHandshakePacketListenerImplMixin",
-    "ServerLoginPacketListenerImplAccessor"
+    "CommonPacketsImplMixin",
+    "ServerGamePacketListenerImplMixin",
   ],
   "injectors": {
     "defaultRequire": 1

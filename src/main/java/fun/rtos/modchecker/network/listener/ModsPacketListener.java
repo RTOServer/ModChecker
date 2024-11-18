@@ -1,6 +1,7 @@
-package fun.rtos.modchecker.network;
+package fun.rtos.modchecker.network.listener;
 
 import fun.rtos.modchecker.ModChecker;
+import fun.rtos.modchecker.network.ModsPacket;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.commands.Commands;
@@ -15,6 +16,6 @@ public class ModsPacketListener {
         ServerPlayer player = context.player();
         if (player.hasPermissions(Commands.LEVEL_GAMEMASTERS)) return;
         player.connection.disconnect(ModChecker.CONFIG.getMessage(illegal));
-        ModChecker.LOGGER.info("Player %s has illegal mods: %s".formatted(player.getName().getString(), illegal));
+        ModChecker.LOGGER.info("Player {} has illegal mods: {}", player.getName().getString(), illegal);
     }
 }

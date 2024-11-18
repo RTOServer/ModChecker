@@ -1,4 +1,4 @@
-package fun.rtos.modchecker.network.client;
+package fun.rtos.modchecker.network.listener.client;
 
 import fun.rtos.modchecker.network.ModsPacket;
 import fun.rtos.modchecker.network.RequestPacket;
