@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ServerGamePacketListenerImpl.class)
+@Mixin(value = ServerGamePacketListenerImpl.class, remap = false)
 abstract class ServerGamePacketListenerImplMixin {
     @Inject(method = "handleCustomPayload", at = @At("HEAD"))
     private void handleCustomPayload(@NotNull ServerboundCustomPayloadPacket serverboundCustomPayloadPacket, CallbackInfo ci) {

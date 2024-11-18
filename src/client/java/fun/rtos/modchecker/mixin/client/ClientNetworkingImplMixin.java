@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @SuppressWarnings("UnstableApiUsage")
-@Mixin(ClientNetworkingImpl.class)
+@Mixin(value = ClientNetworkingImpl.class, remap = false)
 abstract class ClientNetworkingImplMixin {
     @Inject(method = "handleVersionPacket", at = @At("HEAD"))
     private static void handleVersionPacket(CommonVersionPayload payload, @NotNull PacketSender packetSender, CallbackInfoReturnable<Integer> cir) {
