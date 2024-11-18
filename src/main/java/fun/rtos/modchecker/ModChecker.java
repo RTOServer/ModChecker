@@ -2,7 +2,7 @@ package fun.rtos.modchecker;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import fun.rtos.modchecker.event.ServerEventListener;
+import fun.rtos.modchecker.event.ServerLifecycleEventsListener;
 import fun.rtos.modchecker.event.ServerPlayConnectionEventsListener;
 import fun.rtos.modchecker.network.Networks;
 import fun.rtos.modchecker.network.ServerNetworks;
@@ -30,7 +30,7 @@ public class ModChecker implements ModInitializer {
         ModChecker.CONFIG.loadConfig();
         Networks.register();
         ServerNetworks.register();
-        ServerEventListener.register();
+        ServerLifecycleEventsListener.register();
         ServerPlayConnectionEventsListener.register();
     }
 

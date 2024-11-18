@@ -70,7 +70,10 @@ public class ModCheckerCommand {
                 .then(
                     Commands.literal("list")
                         .executes(ModCheckerCommand::listMods)
-                        .then(Commands.argument("page", IntegerArgumentType.integer(1)))
+                        .then(
+                            Commands.argument("page", IntegerArgumentType.integer(1))
+                                .executes(ModCheckerCommand::listMods)
+                        )
                 )
         );
     }

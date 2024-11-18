@@ -4,14 +4,9 @@
   "package": "fun.rtos.modchecker.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "ClientHandshakePacketListenerImplAccessor",
-    "ClientNetworkingImplMixin",
-    "ConnectScreenAccessor"
+    "ClientNetworkingImplMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-    "ConnectScreen$1Mixin"
-  ]
+  }
 }
